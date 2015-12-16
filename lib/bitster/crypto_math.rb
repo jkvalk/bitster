@@ -21,7 +21,7 @@ module Bitster
 
     def fermat_prime?(p)
       raise ArgumentError, 'Argument must be an Integer greater than 3' unless p.is_a?(Integer) && (p>3)
-      [p-1, (p/1.5).round, (p/2.0).round, (p/3.0).round, 1].each do |a|
+      [p-1, p/2, p/3, p/4, 1].each do |a|
         # return false if (a**(p-1) % p) != (1 % p)
         return false if modular_pow(a, (p-1), p) != (1 % p)
       end
