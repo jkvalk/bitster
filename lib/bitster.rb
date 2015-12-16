@@ -8,5 +8,5 @@ require 'bitster/rsa_private_key'
 require 'json'
 
 module Bitster
-  include CryptoMath
+  include self::CryptoMath
 end
