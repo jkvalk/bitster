@@ -1,7 +1,6 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "bundler/gem_tasks"
 require 'bitster/version'
 
 Gem::Specification.new do |spec|
@@ -11,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["jkvalk@mail.ru"]
 
   spec.summary       = %q{Experimental/educational cryptography/math library.}
-  spec.description   = "Experimental/educational cryptography/math library"
+  spec.description   = "Experimental/educational cryptography/math library."
   spec.homepage      = "https://github.com/jkvalk/bitster"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
@@ -29,7 +28,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "guard-rspec"
   spec.add_development_dependency "coveralls"
   spec.add_development_dependency "pry"
+  spec.add_development_dependency "awesome_print"
 
-  #spec.add_dependency "snmp", '~> 1.2'
+
+  spec.add_dependency "json"
 
 end

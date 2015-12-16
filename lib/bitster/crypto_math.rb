@@ -1,4 +1,4 @@
-module Helpers
+module CryptoMath
 
   def modular_pow(base, exponent, modulus)
     return nil if modulus == 1
@@ -24,7 +24,6 @@ module Helpers
       # return false if (a**(p-1) % p) != (1 % p)
       return false if modular_pow(a, (p-1), p) != (1 % p)
     end
-
     true
   end
 
@@ -57,22 +56,39 @@ module Helpers
   end
 
   def gen_odd(bits)
-    max = 2**bits - 1
-    r = rand(5..max)
+    max = 2**bits
+    min = 2**(bits-1)
+    r = rand(min..max)
     return r - 1 if r%2 == 0
     r
   end
 
-  def gen_key(bits)
-    lft = gen_odd(bits/2)
-    rgt = gen_odd(bits/2)
-    until probable_prime?(lft) do
-      lft = gen_odd(bits/2)
-    end
+  def modular_multiplicative_inverse(a, n)
+    t = 0
+    nt = 1
+    r = n
+    nr = a % n
 
-    until probable_prime?(rgt) do
-      rgt = gen_odd(bits/2)
+    if n < 0
+      n = -n
     end
-    rgt * lft
+    if a < 0
+      a = n - (-a % n)
+    end
+    while nr != 0 do
+      quot = 0
+      quot = (r/nr) unless (r/nr) == 0
+      tmp = nt; nt = t - quot*nt; t = tmp
+      tmp = nr; nr = r - quot*nr; r = tmp
+    end
+    if r > 1
+      raise StandardError, "#{a} and #{n} are not coprimes, can't find MMI"
+      #return -1
+    end
+    if t < 0
+      t += n
+    end
+    t
   end
+
 end

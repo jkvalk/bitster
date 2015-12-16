@@ -2,10 +2,12 @@ PATH
   remote: .
   specs:
     bitster (0.0.1)
+      json
 
 GEM
   remote: https://rubygems.org/
   specs:
+    awesome_print (1.6.1)
     celluloid (0.16.0)
       timers (~> 4.0.0)
     coderay (1.1.0)
@@ -97,6 +99,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_print
   bitster!
   bundler (~> 1.10)
   coveralls

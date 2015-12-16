@@ -1,4 +1,4 @@
-describe 'Helpers' do
+describe 'CryptoMath' do
 
   before do
     @repeat = 1
@@ -13,23 +13,12 @@ describe 'Helpers' do
   it 'should generate odd' do
     @repeat.times do
       [16, 32, 48, 56, 64, 128, 192, 256, 512].each do |i|
+        # ToDo: test for real ranges
         expect(gen_odd(i)).to satisfy { |v| v >= 3 }
         expect(gen_odd(i)).to satisfy { |v| (v%2) == 1 }
         expect(gen_odd(i)).to satisfy { |v| v <= 2**i }
       end
     end
-  end
-
-  it 'should generate key' do
-    @repeat.times do
-      [16, 32, 48, 56, 64, 128, 192, 256, 512, 1024].each do |i|
-        key = gen_key(i)
-        expect(key).to satisfy { |v| v >= 9 }
-        expect(key).to satisfy { |v| (v%2) == 1 }
-        expect(key).to satisfy { |v| v <= 2**i }
-      end
-    end
-    true
   end
 
   it 'should perform fermat test' do
