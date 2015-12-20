@@ -20,8 +20,5 @@ module Bitster
     private
     include VarHelpers
 
-
-
-
   end
 end

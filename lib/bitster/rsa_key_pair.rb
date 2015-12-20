@@ -1,7 +1,6 @@
 module Bitster
   class RSAKeyPair
 
-
     attr_reader :len, :shorter, :p, :q, :n, :k, :e, :private_key, :public_key
 
     def initialize(len)

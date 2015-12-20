@@ -4,6 +4,8 @@ require 'bitster/var_helpers'
 require 'bitster/rsa_key_pair'
 require 'bitster/rsa_pub_key'
 require 'bitster/rsa_private_key'
+require 'bitster/rsa_machine'
+
 
 require 'json'
 

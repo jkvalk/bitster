@@ -84,7 +84,6 @@ module Bitster
       end
       if r > 1
         raise StandardError, "#{a} and #{n} are not coprimes, can't find MMI"
-        #return -1
       end
       if t < 0
         t += n
