@@ -1,6 +1,7 @@
 # Bitster
+
 Bitster is an educational/experimental/fun RSA public/asym key cryptography implementation in Ruby. To become a really cool toy, 
-a custom AES engine and some multithreading should be added.
+a custom AES engine and some multi-threading should be added.
 
 ## Usage
 ```ruby
