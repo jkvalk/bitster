@@ -2,23 +2,6 @@
 Bitster is an educational/experimental/fun RSA public/asym key cryptography implementation in Ruby. To become a really cool toy, 
 a custom AES engine and some multithreading should be added.
 
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'bitster'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install bitster
-
 ## Usage
 ```ruby
 require 'bitster'
