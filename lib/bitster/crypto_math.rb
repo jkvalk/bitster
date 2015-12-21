@@ -1,6 +1,18 @@
 module Bitster
+
+  # This module implements mathematical functions needed by the RSA layer,
+  # i.e. primality tests, modular arithmetic, and random odd number generation.
+  #
+  # ToDo: Error handling (with custom Exception class, etc.)
+  #
   module CryptoMath
 
+    # This function performs what is known as Modular exponentiation
+    # https://en.wikipedia.org/wiki/Modular_exponentiation
+    #
+    # Modular exponentiation are easy to compute, even when the numbers
+    # involved are enormous.
+    #
     def modular_pow(base, exponent, modulus)
       return nil if modulus == 1
       result = 1
@@ -15,10 +27,21 @@ module Bitster
       result
     end
 
+    # This function just combines Fermat test and Rabin-Miller test.
+    # If both witness the primality, we consider the argument
+    # probable prime
+    #
+    # ToDo: How to calculate an optimal number of RM rounds instead of 7?
+    #
     def probable_prime?(p, k=7)
       fermat_prime?(p) && rm_prime?(p, k)
     end
 
+    # This is Fermat primality test.
+    # https://en.wikipedia.org/wiki/Fermat_primality_test
+    #
+    # ToDo: How to really choose "a" and how many iterations to run?
+    #
     def fermat_prime?(p)
       raise ArgumentError, 'Argument must be an Integer greater than 3' unless p.is_a?(Integer) && (p>3)
       [p-1, p/2, p/3, p/4, 1].each do |a|
@@ -28,6 +51,9 @@ module Bitster
       true
     end
 
+    # This is Rabin-Miller primality test
+    # https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test
+    #
     def rm_prime?(n, k)
       r=0; d=0
       (1..128).each do |i|
@@ -56,6 +82,11 @@ module Bitster
       true
     end
 
+    # This function generates a random odd integer in a range of
+    # 2^(bits-1) ... 2^(bits)
+    #
+    # ToDo: What should the minimum really be?
+    #
     def gen_odd(bits)
       max = 2**bits
       min = 2**(bits-1)
@@ -64,6 +95,10 @@ module Bitster
       r
     end
 
+    # This function calculates the Modular multiplicative inverse
+    # which is needed in the key generation process.
+    # https://en.wikipedia.org/wiki/Modular_multiplicative_inverse
+    #
     def modular_multiplicative_inverse(a, n)
       t = 0
       nt = 1

@@ -1,4 +1,4 @@
-$dev = true
+$dev = true # flip this if running against an actually installed gem
 
 if !$dev
   require 'bitster'

@@ -1,6 +1,9 @@
 module Bitster
-  class RSAPrivateKey
 
+  # This class represents RSA private key and provides various
+  # formatting and similar helper methods associated with it.
+  #
+  class RSAPrivateKey
 
     attr_reader :modulus, :exponent, :len, :p, :q
 

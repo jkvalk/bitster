@@ -1,4 +1,8 @@
 module Bitster
+
+  # This class represents RSA public key and provides various
+  # formatting and similar helper methods associated with it.
+  #
   class RSAPubKey
 
     attr_reader :modulus, :exponent, :len

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bitster (0.0.1b)
+    bitster (0.0.1c)
       json
 
 GEM

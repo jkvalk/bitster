@@ -1,4 +1,9 @@
 module Bitster
+
+  # This class represents a RSA key-pair. The most important feature is the
+  # generation of the key-pair, so it is an implementation of the process
+  # outlined in https://en.wikipedia.org/wiki/RSA_(cryptosystem)#Key_generation
+  #
   class RSAKeyPair
 
     attr_reader :len, :shorter, :p, :q, :n, :k, :e, :private_key, :public_key
@@ -23,6 +28,7 @@ module Bitster
     private
     include CryptoMath
 
+    # ToDo: what should the length difference of p and q really be?
     def gen_p
       len_p = @len/2
       len_p -= rand(2..4) if @shorter == 0
@@ -32,6 +38,7 @@ module Bitster
       end
     end
 
+    # ToDo: what should the length difference of p and q really be?
     def gen_q
       len_q = @len/2
       len_q -= rand(2..4) if @shorter == 1
@@ -45,6 +52,7 @@ module Bitster
       (@p-1)*(@q-1)
     end
 
+    # ToDo: what should the lower bound really be?
     def gen_e
       loop do
         e = rand(4..@k)
