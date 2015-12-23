@@ -28,7 +28,7 @@ module Bitster
     end
 
     # This function just combines Fermat test and Rabin-Miller test.
-    # If both witness the primality, we consider the argument
+    # If both witness the primality, we consider the argument a
     # probable prime
     #
     # ToDo: How to calculate an optimal number of RM rounds instead of 7?

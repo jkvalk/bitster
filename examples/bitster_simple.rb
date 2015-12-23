@@ -14,13 +14,14 @@ end
 
 key_pair = Bitster::RSAKeyPair.new(1024)
 machine = Bitster::RSAMachine.new(:keypair => key_pair)
-ciphertext = Array.new
 
-%w(H E L L O).each do |char|
-  ciphertext << machine.encrypt(char.ord)
+ciphertext = %w(H E L L O).collect do |char|
+  machine.encrypt(char.ord)
 end
 
-ciphertext.each do |ascii_code|
-  print (machine.decrypt(ascii_code)).chr
-end
+plaintext = ciphertext.collect do |ascii_code|
+  machine.decrypt(ascii_code).chr
+end.join('')
+
+puts plaintext
 

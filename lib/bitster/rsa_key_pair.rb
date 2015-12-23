@@ -6,6 +6,9 @@ module Bitster
   #
   class RSAKeyPair
 
+    class RSAKeyPairError < StandardError
+    end
+
     attr_reader :len, :shorter, :p, :q, :n, :k, :e, :private_key, :public_key
 
     def initialize(len)
@@ -27,6 +30,14 @@ module Bitster
 
     private
     include CryptoMath
+
+    def handle_exceptions
+      begin
+        yield
+      rescue StandardError => e
+        raise RSAKeyPairError, "Exception in RSAKeyPair: #{e}"
+      end
+    end
 
     # ToDo: what should the length difference of p and q really be?
     def gen_p

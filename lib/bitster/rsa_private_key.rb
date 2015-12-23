@@ -22,7 +22,6 @@ module Bitster
       JSON.pretty_generate get_hash
     end
 
-
     private
     include VarHelpers
 
