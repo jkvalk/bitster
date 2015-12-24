@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/jkvalk/bitster.svg?branch=master)](https://travis-ci.org/jkvalk/bitster)
+[![Gem Version](https://badge.fury.io/rb/bitster.svg)](https://badge.fury.io/rb/bitster)
 [![Coverage Status](https://coveralls.io/repos/jkvalk/bitster/badge.svg?branch=master&service=github)](https://coveralls.io/github/jkvalk/bitster?branch=master)
 [![Code Climate](https://codeclimate.com/github/jkvalk/bitster/badges/gpa.svg)](https://codeclimate.com/github/jkvalk/bitster)
-[![Gem Version](https://badge.fury.io/rb/bitster.svg)](https://badge.fury.io/rb/bitster)
 
 
 # Bitster
