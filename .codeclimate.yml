@@ -2,3 +2,5 @@ languages:
   Ruby: true
 exclude_paths:
 - coverage/
+- /*
+- spec/
