@@ -15,8 +15,6 @@ module Bitster
       @len = len
 
       @shorter = rand(0..1)
-      #@p = gen_p
-      #@q = gen_q
       @p, @q = gen_pq
       @n = @p * @q # modulus
       @k = gen_totient
