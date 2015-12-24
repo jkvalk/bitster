@@ -1,7 +1,0 @@
-languages:
-  Ruby: true
-exclude_paths:
-- coverage/
-- spec/
-- examples
-- ".rubocop.yml"
