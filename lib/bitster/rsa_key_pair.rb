@@ -15,8 +15,9 @@ module Bitster
       @len = len
 
       @shorter = rand(0..1)
-      @p = gen_p
-      @q = gen_q
+      #@p = gen_p
+      #@q = gen_q
+      @p, @q = gen_pq
       @n = @p * @q # modulus
       @k = gen_totient
       @e = gen_e # pubkey exponent
@@ -31,27 +32,23 @@ module Bitster
     include CryptoMath
 
     # ToDo: what should the length difference of p and q really be?
-    def gen_p
-      handle_exceptions do
-        len_p = @len/2
-        len_p -= rand(2..4) if @shorter == 0
-        loop do
-          p = gen_odd(len_p)
-          return p if probable_prime?(p)
-        end
-      end
-    end
-
-    # ToDo: what should the length difference of p and q really be?
-    def gen_q
-      handle_exceptions do
-        len_q = @len/2
-        len_q -= rand(2..4) if @shorter == 1
-        loop do
-          q = gen_odd(len_q)
-          return q if probable_prime?(q)
-        end
-      end
+    def gen_pq
+        #handle_exceptions do
+          len = @len/2
+          len_p = len_q = len
+          len_q = len - rand(2..4) if @shorter == 1
+          len_p = len - rand(2..4) if @shorter == 0
+          p=q=0
+          loop do
+            q = gen_odd(len_q)
+            break if probable_prime?(q)
+          end
+          loop do
+            p = gen_odd(len_p)
+            break if probable_prime?(p)
+          end
+          return p, q
+        #end
     end
 
     def gen_totient
