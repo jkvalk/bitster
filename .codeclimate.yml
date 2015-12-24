@@ -1,4 +1,4 @@
 languages:
   Ruby: true
 exclude_paths:
-- coverage/*
+- coverage/
