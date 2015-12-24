@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/jkvalk/bitster.svg?branch=master)](https://travis-ci.org/jkvalk/bitster)
+[![Coverage Status](https://coveralls.io/repos/jkvalk/bitster/badge.svg?branch=master&service=github)](https://coveralls.io/github/jkvalk/bitster?branch=master)
+
+
 # Bitster
 
 Bitster is an educational/experimental/fun RSA public/asym key cryptography implementation in Ruby. To become a really cool toy, 
