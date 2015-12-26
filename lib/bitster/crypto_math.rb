@@ -115,12 +115,8 @@ module Bitster
       nt = 1
       r = n
       nr = a % n
-      if n < 0
-        n = -n
-      end
-      if a < 0
-        a = n - (-a % n)
-      end
+      n = -n if n < 0
+      a = n - (-a % n) if a < 0
       while nr != 0 do
         quot = 0
         quot = (r/nr) unless (r/nr) == 0
