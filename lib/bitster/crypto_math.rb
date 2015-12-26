@@ -54,36 +54,6 @@ module Bitster
     # This is Rabin-Miller primality test
     # https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test
     #
-=begin
-    def rm_prime?(n, k)
-      r=0; d=0
-      (1..128).each do |i|
-        d = n / (2**i)
-        r = i
-        break unless (d % 2) == 0
-      end
-      k.times do
-        flg = false
-        a = rand(2..(n-2))
-        x = modular_pow(a, d, n)
-        if (x == 1) || (x == (n - 1))
-          next
-        end
-        (r-1).times do
-          x = modular_pow(x, 2, n)
-          return false if x == 1
-          if x == (n - 1)
-            flg = true
-            break
-          end
-        end
-        next if flg
-        return false
-      end
-      true
-    end
-=end
-
     def rm_prime?(n, k)
       r = 0
       d = 0
@@ -127,6 +97,13 @@ module Bitster
       r = rand(min..max)
       return r - 1 if r%2 == 0
       r
+    end
+
+    def gen_odd_prime(bits)
+      loop do
+        p = gen_odd(bits)
+        return p if probable_prime?(p)
+      end
     end
 
     # This function calculates the Modular multiplicative inverse

@@ -36,15 +36,8 @@ module Bitster
           len_p = len_q = length
           len_q = length - rand(2..4) if shorter == 1
           len_p = length - rand(2..4) if shorter == 0
-          p=q=0
-          loop do
-            q = gen_odd(len_q)
-            break if probable_prime?(q)
-          end
-          loop do
-            p = gen_odd(len_p)
-            break if probable_prime?(p)
-          end
+          q = gen_odd_prime(len_q)
+          p = gen_odd_prime(len_p)
           return p, q
         end
     end
