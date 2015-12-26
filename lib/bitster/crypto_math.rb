@@ -118,15 +118,20 @@ module Bitster
       n = -n if n < 0
       a = n - (-a % n) if a < 0
       while nr != 0 do
-        quot = 0
-        quot = (r/nr) unless (r/nr) == 0
-        tmp = nt; nt = t - quot*nt; t = tmp
-        tmp = nr; nr = r - quot*nr; r = tmp
+        r, nr, nt, t = mmi_helper(r, nr, nt, t)
       end
       raise StandardError,
             "#{a} and #{n} are not coprimes, can't find MMI" if r > 1
       t += n if t < 0
       t
+    end
+
+    def mmi_helper(r, nr, nt, t)
+      quot = 0
+      quot = (r/nr) unless (r/nr) == 0
+      tmp = nt; nt = t - quot*nt; t = tmp
+      tmp = nr; nr = r - quot*nr; r = tmp
+      return r, nr, nt, t
     end
     
     extend self
