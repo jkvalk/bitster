@@ -19,13 +19,13 @@ module Bitster
     # https://en.wikipedia.org/wiki/RSA_(cryptosystem)#Encryption
     #
     def encrypt(plaintext_msg_code)
-      CryptoMath::modular_pow(plaintext_msg_code, @pubkey.exponent, @pubkey.modulus)
+      CryptoMath::modular_pow(plaintext_msg_code, pubkey.exponent, pubkey.modulus)
     end
 
     # https://en.wikipedia.org/wiki/RSA_(cryptosystem)#Decryption
     #
     def decrypt(ciphertext_msg_code)
-      CryptoMath::modular_pow(ciphertext_msg_code, @prikey.exponent, @prikey.modulus)
+      CryptoMath::modular_pow(ciphertext_msg_code, prikey.exponent, prikey.modulus)
     end
 
   end

@@ -14,7 +14,7 @@ module Bitster
     end
 
     def get_hash
-      { modulus: pad(@modulus, 16, @len), exponent: pad(@exponent, 16, @len) }
+      { modulus: pad(modulus, 16, len), exponent: pad(exponent, 16, len) }
     end
 
     def get_json

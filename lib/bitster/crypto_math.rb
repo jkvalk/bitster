@@ -54,6 +54,7 @@ module Bitster
     # This is Rabin-Miller primality test
     # https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test
     #
+=begin
     def rm_prime?(n, k)
       r=0; d=0
       (1..128).each do |i|
@@ -81,6 +82,39 @@ module Bitster
       end
       true
     end
+=end
+
+    def rm_prime?(n, k)
+      r = 0
+      d = 0
+      (1..128).each do |i|
+        d = n / (2**i)
+        r = i
+        break unless d.even?
+      end
+      rm_witness_loop(k, n, d, r)
+    end
+
+    def rm_witness_loop(k, n, d, r)
+      k.times do
+        a = rand(2..(n - 2))
+        x = modular_pow(a, d, n)
+
+        next if x == 1 || x == (n - 1)
+        next if rm_inner_witness_loop(x, n, r)
+        return false
+      end
+      true
+    end
+
+    def rm_inner_witness_loop(x, n, r)
+      (r - 1).times do
+        x = modular_pow(x, 2, n)
+        return false if x == 1
+        return true if x == (n - 1)
+      end
+      false
+    end
 
     # This function generates a random odd integer in a range of
     # 2^(bits-1) ... 2^(bits)
@@ -104,7 +138,6 @@ module Bitster
       nt = 1
       r = n
       nr = a % n
-
       if n < 0
         n = -n
       end
@@ -117,12 +150,9 @@ module Bitster
         tmp = nt; nt = t - quot*nt; t = tmp
         tmp = nr; nr = r - quot*nr; r = tmp
       end
-      if r > 1
-        raise StandardError, "#{a} and #{n} are not coprimes, can't find MMI"
-      end
-      if t < 0
-        t += n
-      end
+      raise StandardError,
+            "#{a} and #{n} are not coprimes, can't find MMI" if r > 1
+      t += n if t < 0
       t
     end
     

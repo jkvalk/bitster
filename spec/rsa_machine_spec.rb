@@ -2,14 +2,22 @@ describe 'RSAMachine' do
 
   before(:all) do
     begin
-      @key_pair = RSAKeyPair.new(360)
+      @pubkey = RSAPubKey.new(
+          0x60ea9420ebbd34ce235f6f8fadeade8ae6b659250d827dacb49661d547d9f33890bae91a4ec08b274646149e5,
+          15313798138299520533890577607468214258928888911870549345522168491683238633588343642420845217348950357897417,
+          360)
+      @prikey = RSAPrivateKey.new(
+          68673665721464068416235980858199544743687468414175557,
+          809180090317916969499569424473529102070680327018428449,
+          37801922716216207366067363960180605840741401288678166395972980898542220320045966295791798696007428382434425,
+          360)
     rescue
       nil
     end
   end
 
   it 'should encrypt and decrypt' do
-    machine = RSAMachine.new(:keypair => @key_pair)
+    machine = RSAMachine.new(:pubkey => @pubkey, :prikey => @prikey)
     ctext = machine.encrypt(123)
 
     expect(machine.decrypt(ctext)).to eq(123)
