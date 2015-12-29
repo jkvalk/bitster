@@ -1,16 +1,11 @@
 describe 'RSAPrivateKey' do
 
   before(:all) do
-    begin
-      len = 512
-      p = rand(2..((2**len/2)-1))
-      q = rand(2..((2**len/2)-1))
-      exp = rand(2..((2**len/2)-1))
-      @key = RSAPrivateKey.new(p, q, exp, len)
-    rescue
-      nil
-    end
-
+    len = 512
+    p = rand(2..((2**len/2)-1))
+    q = rand(2..((2**len/2)-1))
+    exp = rand(2..((2**len/2)-1))
+    @key = RSAPrivateKey.new(p: p, q: q, exponent: exp, len: len)
   end
 
   it 'should initialize' do

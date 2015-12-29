@@ -11,8 +11,18 @@ module Bitster
 
     attr_reader :private_key, :public_key
 
-    def initialize(len)
-      @len = len
+    def initialize(opts={})
+      options = init_defaults.merge(opts)
+      @len = options.fetch(:len)
+      @private_key = options.fetch(:private_key)
+      @public_key = options.fetch(:public_key)
+    end
+
+    def init_defaults
+      { len: 1024, private_key: nil, public_key: nil }
+    end
+
+    def generate!
       @shorter = rand(0..1)
       @p, @q = gen_pq
       @n = p * q # modulus
@@ -20,9 +30,9 @@ module Bitster
       @e = gen_e # pubkey exponent
       @d = gen_d # prikey exponent
 
-      @private_key = RSAPrivateKey.new(p, q, d, len)
-      @public_key = RSAPubKey.new(n, e, len)
-
+      @private_key = RSAPrivateKey.new(p: p, q: q, exponent: d, len: len)
+      @public_key = RSAPubKey.new(modulus: n, exponent: e, len: len)
+      self
     end
 
     private

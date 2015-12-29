@@ -111,10 +111,7 @@ module Bitster
     # https://en.wikipedia.org/wiki/Modular_multiplicative_inverse
     #
     def modular_multiplicative_inverse(a, n)
-      t = 0
-      nt = 1
-      r = n
-      nr = a % n
+      t = 0; nt = 1; r = n; nr = a % n
       n = -n if n < 0
       a = n - (-a % n) if a < 0
       while nr != 0 do
@@ -127,8 +124,7 @@ module Bitster
     end
 
     def mmi_helper(r, nr, nt, t)
-      quot = 0
-      quot = (r/nr) unless (r/nr) == 0
+      quot = (r/nr)
       tmp = nt; nt = t - quot*nt; t = tmp
       tmp = nr; nr = r - quot*nr; r = tmp
       return r, nr, nt, t

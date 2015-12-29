@@ -12,8 +12,9 @@ else
   require_relative '../lib/bitster/rsa_machine'
 end
 
-key_pair = Bitster::RSAKeyPair.new(1024)
-machine = Bitster::RSAMachine.new(:keypair => key_pair)
+key_pair = Bitster::RSAKeyPair.new(:len => 1024).generate!
+machine = Bitster::RSAMachine.new(:pubkey => key_pair.public_key,
+                                  :prikey => key_pair.private_key)
 
 ciphertext = %w(H E L L O).collect do |char|
   machine.encrypt(char.ord)

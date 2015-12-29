@@ -7,11 +7,17 @@ module Bitster
 
     attr_reader :modulus, :exponent, :len, :p, :q
 
-    def initialize(p, q, exponent, len)
-      @exponent = exponent
-      @modulus = p*q
-      @p = p; @q = q
-      @len = len
+    def initialize(opts={})
+      options = init_defaults.merge(opts)
+      @exponent = options.fetch :exponent
+      @p = options.fetch :p
+      @q = options.fetch :q
+      @modulus = @p * @q
+      @len = options.fetch :len
+    end
+
+    def init_defaults
+      { p: nil, q: nil, exponent: nil, len: nil }
     end
 
     def get_hash
