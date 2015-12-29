@@ -57,9 +57,9 @@ result = machine.block_decrypt_mt(ciphertext).collect {|c| c.chr }
 t1 = Time.now.to_i
 puts " done; time elapsed: #{t1 - t0}s."
 
-#puts "[*] Result:"
-#puts "-"*80
-#puts result.join
-#puts "-"*80
+puts "[*] Result:"
+puts "-"*80
+puts result.join
+puts "-"*80
 
 puts "[*] -END-"

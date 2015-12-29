@@ -15,7 +15,7 @@ module Bitster
     end
 
     def init_defaults
-      {threads: 4, pubkey: nil, prikey: nil}
+      {threads: 8, pubkey: nil, prikey: nil}
     end
     # https://en.wikipedia.org/wiki/RSA_(cryptosystem)#Encryption
     #
@@ -37,7 +37,45 @@ module Bitster
       ciphertext.collect { |code| decrypt code }
     end
 
+    def work_mt(input, operation="")
+      slice_len = (input.length/threads.to_f).ceil
+      output = []
+      result = []
+      threads = []
+      i = 0
+      input.each_slice(slice_len) do |slice|
+        threads << Thread.new(i) { |t_num|
+          case operation
+            when /dec/
+              output[t_num] = block_decrypt(slice)
+            when /enc/
+              output[t_num] = block_encrypt(slice)
+            else
+              raise "Operation not recognized!"
+          end
+        }
+        i += 1
+      end
+      threads.each {|t| t.join }
+
+      output.each do |row|
+        row.each do |col|
+          result << col
+        end
+      end
+
+      result
+    end
+
     def block_decrypt_mt(ciphertext)
+      work_mt(ciphertext, 'dec')
+    end
+
+    def block_encrypt_mt(plaintext)
+      work_mt(plaintext, 'enc')
+    end
+
+    def block_decrypt_mt_(ciphertext)
       slice_len = (ciphertext.length/threads.to_f).ceil
       ptext = []
       result = []
@@ -60,7 +98,7 @@ module Bitster
       result
     end
 
-    def block_encrypt_mt(plaintext)
+    def block_encrypt_mt_(plaintext)
       slice_len = (plaintext.length/threads.to_f).ceil
       ctext = []
       result = []
