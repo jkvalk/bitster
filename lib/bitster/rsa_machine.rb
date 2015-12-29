@@ -74,53 +74,7 @@ module Bitster
     def block_encrypt_mt(plaintext)
       work_mt(plaintext, 'enc')
     end
-
-    def block_decrypt_mt_(ciphertext)
-      slice_len = (ciphertext.length/threads.to_f).ceil
-      ptext = []
-      result = []
-      threads = []
-      i = 0
-      ciphertext.each_slice(slice_len) do |slice|
-        threads << Thread.new(i) { |t_num|
-          ptext[t_num] = block_decrypt(slice)
-        }
-        i += 1
-      end
-      threads.each {|t| t.join }
-
-      ptext.each do |row|
-        row.each do |col|
-          result << col
-        end
-      end
-
-      result
-    end
-
-    def block_encrypt_mt_(plaintext)
-      slice_len = (plaintext.length/threads.to_f).ceil
-      ctext = []
-      result = []
-      threads = []
-      i = 0
-      plaintext.each_slice(slice_len) do |slice|
-        threads << Thread.new(i) { |t_num|
-          ctext[t_num] = block_encrypt(slice)
-        }
-        i += 1
-      end
-      threads.each {|t| t.join }
-
-      ctext.each do |row|
-        row.each do |col|
-          result << col
-        end
-      end
-
-      result
-    end
-
+    
     private
     include CryptoMath
 
